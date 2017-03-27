@@ -3,6 +3,8 @@ var Backbone = require('backbone');
 
 var Shirt = require('../models/shirts').Shirt;
 var ShirtCollection = require('../models/shirts').ShirtCollection
+var Order = require('../models/shirts').Order;
+var OrderCollection = require('../models/shirts').OrderCollection
 
 var MainLayout = React.createClass({
     getInitialState: function() {
@@ -46,7 +48,7 @@ var MainLayout = React.createClass({
             },
         ]);
         this.setState({shirtCollection: newShirtCollection});
-        console.log('here is state', this.state);
+
     },
 
     render: function() {
@@ -73,7 +75,7 @@ var MainLayout = React.createClass({
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#">Cart</a>
+                                    <a href="#cart/">Cart</a>
                                 </li>
                             </ul>
                         </div>
@@ -90,6 +92,22 @@ var MainLayout = React.createClass({
 });
 
 var Tshirt = React.createClass({
+  getInitialState: function(){
+    var orderCollection = new OrderCollection();
+    var self = this;
+    orderCollection.fetch().done(function(){
+      self.setState({orderCollection: orderCollection})
+      console.log('here', orderCollection);
+  })
+  return {
+    orderCollection: orderCollection
+  };
+  },
+
+    addToOrder: function(item){
+    this.state.orderCollection.add(item);
+    this.forceUpdate();
+  },
 
     render: function() {
       var tshirts = this.props.shirtCollection.map(function(tshirt) {
@@ -134,5 +152,6 @@ var Tshirt = React.createClass({
 });
 
 module.exports = {
-    MainLayout
+    MainLayout,
+    Tshirt
 }
