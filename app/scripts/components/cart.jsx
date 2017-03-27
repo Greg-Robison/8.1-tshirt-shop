@@ -7,23 +7,23 @@ var OrderCollection = require('../models/shirts').OrderCollection
 
 
 var CartLayout = React.createClass({
-// getInitialState: function(){
-//   var orderCollection = new OrderCollection();
-//   var self = this;
-//   orderCollection.fetch().done(function(){
-//     self.setState({orderCollection: orderCollection})
-// })
-// return {
-//   orderCollection: orderCollection
-// };
-// },
-//
-//   addToOrder: function(item){
-//   this.state.orderCollection.add(item);
-//   this.forceUpdate();
-//   console.log(item);
-// },
-//
+getInitialState: function(){
+  var orderCollection = new OrderCollection();
+  var self = this;
+  orderCollection.fetch().done(function(){
+    self.setState({orderCollection: orderCollection})
+})
+return {
+  orderCollection: orderCollection
+};
+},
+
+  addToOrder: function(item){
+  this.state.orderCollection.add(item);
+  this.forceUpdate();
+  console.log(item);
+},
+
 
   render: function(){
     return(
