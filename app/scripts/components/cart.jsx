@@ -28,6 +28,11 @@ var CartLayout = React.createClass({
       total: total
     };
   },
+  handleOrder: function(e){
+    e.preventDefault();
+    localStorage.clear();
+    alert('Thank you for your order!');
+  },
 
   render: function(){
       var cartItems = this.state.cart.map(function(item, index){
@@ -46,6 +51,32 @@ var CartLayout = React.createClass({
       })
     return(
       <div className="container-fluid">
+        <nav className="navbar navbar-default">
+            <div className="container-fluid">
+                <div className="navbar-header">
+                    <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                        <span className="sr-only">Toggle navigation</span>
+                        <span className="icon-bar"></span>
+                        <span className="icon-bar"></span>
+                        <span className="icon-bar"></span>
+                    </button>
+                    <a className="navbar-brand" href="#">Greg's Retro T-Shirts</a>
+                </div>
+                <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul className="nav navbar-nav">
+                        <li className="active">
+                            <a href="#">T-Shirts
+                                <span className="sr-only">(current)</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#cart/">Cart</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+        </nav>
         <div className="row">
           <div className="well col-md-12">
             <div className="col-md-3"><h3>Name</h3></div>
@@ -59,10 +90,13 @@ var CartLayout = React.createClass({
         </div>
         <div className="row">
           <div className="well col-md-2">
+
             <h3>Total</h3>
             <ul>
               <li>{this.state.total}</li>
             </ul>
+            <button onClick={this.handleOrder}type="button" className="btn btn-primary">Place Order</button>
+
           </div>
         </div>
       </div>
